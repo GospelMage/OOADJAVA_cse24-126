@@ -1,24 +1,40 @@
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
 public class LoginController {
-    private final Repository repository;
 
-    public LoginController(Repository repo) {
-        this.repository = repo;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private Button loginButton;
+    @FXML private Button registerPersonalButton;
+    @FXML private Button registerCompanyButton;
+    @FXML private Label messageLabel;
+
+    private HybridBankingSystem mainApp;
+
+    public void setMainApp(HybridBankingSystem mainApp) {
+        this.mainApp = mainApp;
     }
 
-    // register new customer
-    public boolean register(String username, String password, String firstname, String surname, String address) {
-        if (repository.findByUsername(username).isPresent()) {
-            return false; // already exists
+    @FXML
+    private void initialize() {
+        loginButton.setOnAction(e -> handleLogin());
+        registerPersonalButton.setOnAction(e -> mainApp.showPersonalRegistration());
+        registerCompanyButton.setOnAction(e -> mainApp.showCompanyRegistration());
+    }
+
+    private void handleLogin() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        if (!username.isEmpty() && !password.isEmpty()) {
+            mainApp.showMainMenu();
+        } else {
+            messageLabel.setText("Please enter both username and password");
         }
-        Customer c = new Customer(username, password, firstname, surname, address);
-        repository.saveCustomer(c);
-        return true;
-    }
-
-    // authenticate and return the Customer if successful
-    public Customer authenticateUser(String username, String password) {
-        return repository.findByUsername(username)
-                .filter(c -> c.login(username, password))
-                .orElse(null);
     }
 }

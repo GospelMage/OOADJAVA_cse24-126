@@ -1,21 +1,15 @@
-public class Main {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        HybridBankingSystem bankingApp = new HybridBankingSystem(primaryStage);
+        bankingApp.showLoginScreen();
+    }
+
     public static void main(String[] args) {
-        Repository repo = new Repository();
-        LoginController loginController = new LoginController(repo);
-        AccountController accountController = new AccountController(repo);
-
-        LoginView loginView = new LoginView(loginController);
-        AccountView accountView = new AccountView(accountController);
-
-        loginView.displayLogin();
-        while (true) {
-            Customer current = loginView.showLoginMenu();
-            if (current == null) {
-                System.out.println("Goodbye.");
-                break;
-            }
-            // Enter account menu
-            accountView.showAccountMenu(current);
-        }
+        launch(args);
     }
 }

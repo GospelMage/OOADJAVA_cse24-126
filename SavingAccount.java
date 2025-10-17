@@ -1,18 +1,15 @@
-public class InvestmentAccount extends Account implements InterestInterface {
+public class SavingAccount extends Account implements InterestInterface {
     private double interestRate;
-    private double minimumInitialDeposit;
 
-    public InvestmentAccount(String accountNumber, Customer customer, String branch, 
-                           double interestRate, double minimumInitialDeposit) {
+    public SavingAccount(String accountNumber, Customer customer, String branch, double interestRate) {
         super(accountNumber, customer, branch);
         this.interestRate = interestRate;
-        this.minimumInitialDeposit = minimumInitialDeposit;
     }
 
     @Override
     public void calculateInterest() {
         double interest = balance * interestRate / 100;
-        System.out.println("Calculated investment interest: P" + interest + " for account " + accountNumber);
+        System.out.println("Calculated interest: P" + interest + " for account " + accountNumber);
     }
 
     @Override
@@ -23,10 +20,10 @@ public class InvestmentAccount extends Account implements InterestInterface {
             transactions.add(new Transaction(
                 transactions.size() + 1, 
                 interest, 
-                "Investment Interest", 
+                "Interest Payment", 
                 balance
             ));
-            System.out.println("Paid investment interest: P" + interest + " to account " + accountNumber);
+            System.out.println("Paid interest: P" + interest + " to account " + accountNumber);
         }
     }
 
@@ -41,13 +38,5 @@ public class InvestmentAccount extends Account implements InterestInterface {
             balance -= amount;
             transactions.add(new Transaction(transactions.size() + 1, amount, "Withdrawal", balance));
         }
-    }
-
-    public boolean openInvestmentAccount(double initialDeposit) {
-        return initialDeposit >= minimumInitialDeposit;
-    }
-
-    public double getMinimumInitialDeposit() { 
-        return minimumInitialDeposit; 
     }
 }

@@ -1,15 +1,22 @@
 public class ChequeAccount extends Account {
-    private String employmentDetails;
+    private String employee;
+    private String employeeAddress;
 
-    public ChequeAccount(double initialDeposit, String branch, Customer owner, String employmentDetails) {
-        super(initialDeposit, branch, owner);
-        this.employmentDetails = employmentDetails;
+    public ChequeAccount(String accountNumber, Customer customer, String branch, 
+                        String employee, String employeeAddress) {
+        super(accountNumber, customer, branch);
+        this.employee = employee;
+        this.employeeAddress = employeeAddress;
     }
-
-    // May implement overdraft rules here in future
 
     @Override
-    public String toString() {
-        return super.toString() + String.format(" (emp: %s)", employmentDetails);
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            transactions.add(new Transaction(transactions.size() + 1, amount, "Withdrawal", balance));
+        }
     }
+
+    public String getEmployee() { return employee; }
+    public String getEmployeeAddress() { return employeeAddress; }
 }

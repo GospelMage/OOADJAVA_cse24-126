@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" spacing="20" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountViewController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="10">
+         <Button fx:id="backButton" mnemonicParsing="false" text="Back to Main Menu" />
+      </HBox>
+      
+      <Label fx:id="balanceLabel" text="Current Balance: P0.00" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #27ae60;" />
+      <Label fx:id="interestRateLabel" text="Current Interest Rate: 0%" style="-fx-text-fill: #2980b9;" />
+      
+      <VBox spacing="10">
+         <Label text="Your Accounts:" style="-fx-font-weight: bold;" />
+         <TableView fx:id="accountsTable" prefHeight="150.0" prefWidth="600.0">
+            <columns>
+               <TableColumn prefWidth="595.0" text="Account Details" />
+            </columns>
+         </TableView>
+      </VBox>
+      
+      <VBox spacing="10">
+         <Label text="Recent Transactions:" style="-fx-font-weight: bold;" />
+         <TableView fx:id="transactionsTable" prefHeight="200.0" prefWidth="600.0">
+            <columns>
+               <TableColumn prefWidth="595.0" text="Transaction History" />
+            </columns>
+         </TableView>
+      </VBox>
+      
+      <HBox alignment="CENTER" spacing="15">
+         <Label text="Amount:" />
+         <TextField fx:id="amountField" prefWidth="100.0" promptText="Enter amount" />
+         <Button fx:id="depositButton" mnemonicParsing="false" text="Deposit" style="-fx-background-color: #27ae60; -fx-text-fill: white;" />
+         <Button fx:id="withdrawButton" mnemonicParsing="false" text="Withdraw" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
+      </HBox>
+      
+      <HBox alignment="CENTER" spacing="15">
+         <Button fx:id="calculateInterestButton" mnemonicParsing="false" text="Calculate Interest" style="-fx-background-color: #f39c12; -fx-text-fill: white;" />
+         <Button fx:id="payInterestButton" mnemonicParsing="false" text="Pay Interest" style="-fx-background-color: #9b59b6; -fx-text-fill: white;" />
+      </HBox>
+   </children>
+</VBox>
